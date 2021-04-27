@@ -1,0 +1,42 @@
+﻿<Window x:Class="WPFMVVMCRUD.AcoesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFMVVMCRUD"
+        mc:Ignorable="d"
+        Title="Ação" Height="313.499" Width="300" WindowStyle="ToolWindow">
+    <Grid Margin="3">
+        <StackPanel Orientation="Vertical" Height="268" VerticalAlignment="Top">
+            <TextBlock Text="Tipo"/>
+            <TextBox  Text="{Binding Tipo}" IsEnabled="False"/>
+            <TextBlock Text="Nome do Ativo"/>
+            <TextBox Text="{Binding NomeAtivo}"/>
+            <TextBlock Text="Codigo do Ativo"/>
+            <TextBox Text="{Binding CodigoAtivo}"/>
+            <TextBlock Text="Valor"/>
+            <TextBox Text="{Binding Valor}"/>
+            <TextBlock Text="Data da Cotação"/>
+            <DatePicker SelectedDate="{Binding DataCotacao}"/>
+            <TextBlock Text="Observação sobre a ação"/>
+            <TextBox Text="{Binding ObsAcoes}" Height="48"/>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <Button Name="OKButton" 
+                        Grid.Column="0"
+                        Content="OK" 
+                        Margin="3"
+                        IsDefault="True" 
+                        Click="OKButton_Click"/>
+                <Button Grid.Column="1" 
+                        Content="Cancelar" 
+                        Margin="3"
+                        IsCancel="True"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

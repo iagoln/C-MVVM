@@ -1,0 +1,55 @@
+﻿<Window x:Class="WPFMVVMCRUD.HomeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFMVVMCRUD"
+        mc:Ignorable="d"
+        Title="Produtos Financeiro" Height="300" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="234*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Margin="3" 
+                    Padding="3" 
+                    CommandParameter="{Binding}"
+                    Command="{Binding AddAcoes}"
+                    Content="Novo Ação"/>
+            <Button Margin="3" 
+                    Padding="3" 
+                    CommandParameter="{Binding}"
+                    Command="{Binding AddFundo}"
+                    Content="Novo Fundo"/>
+            <Button Margin="3" 
+                    Padding="3"
+                    CommandParameter="{Binding}"
+                    Command="{Binding Update}"
+                    Content="Editar"/>
+            <Button Margin="3" 
+                    Padding="3"  
+                    CommandParameter="{Binding}" 
+                    Command="{Binding Delete}"
+                    Content="Deletar"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" 
+                      HorizontalScrollBarVisibility="Visible"
+                      VerticalScrollBarVisibility="Hidden">
+            <DataGrid ItemsSource="{Binding ProdutosFinanceiro}" 
+                      AutoGenerateColumns="False" 
+                      IsReadOnly="True"
+                      SelectedItem="{Binding ProdutoSelecionado}" Height="215">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}"/>
+                    <DataGridTextColumn Header="Codigo" Binding="{Binding NomeAtivo}"/>
+                    <DataGridTextColumn Header="Codigo" Binding="{Binding CodigoAtivo}"/>
+                    <DataGridTextColumn Header="Valor" Binding="{Binding Valor}"/>
+                    <DataGridTextColumn Header="Data da cotação" Binding="{Binding DataCotacao, StringFormat=\{0:d\}}"/>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+    </Grid>
+</Window>
