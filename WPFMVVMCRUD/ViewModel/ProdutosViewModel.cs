@@ -11,9 +11,23 @@ namespace WPFMVVMCRUD.ViewModel
 {
     public class ProdutosViewModel : BaseNotifyPropertyChanged
     {
-        public ObservableCollection<IProdutosFinanceiros> ProdutosFinanceiro { get; private set; }
-
+      
         private IProdutosFinanceiros _produtoSelecionado;
+        private IBanco bancoComando;
+        public ProdutosViewModel()
+        {
+            this.bancoComando = new SqlServe();
+            ProdutosFinanceiro = new ObservableCollection<IProdutosFinanceiros>(bancoComando.ListarAtivos());
+           // ProdutosFinanceiro =  bancoComando.ListarAtivos();
+            this.Comandos();
+        }
+        //public ProdutosViewModel(IBanco conec)
+        //{
+        //    this.bancoComando = conec;
+        //    ProdutosFinanceiro = new ObservableCollection<IProdutosFinanceiros>(this.bancoComando.ListarAtivos());
+        //    this.Comandos();
+        //}
+
         public IProdutosFinanceiros ProdutoSelecionado
         {
             get { return _produtoSelecionado; }
@@ -22,21 +36,21 @@ namespace WPFMVVMCRUD.ViewModel
                 SetField(ref _produtoSelecionado, value);
             }
         }
-        private IComandoBanco bancoComando { get; set; } //tipo IT
-        public ProdutosViewModel()
-        {
-            this.bancoComando = new SqlServe();
-            ProdutosFinanceiro = new ObservableCollection<IProdutosFinanceiros>(bancoComando.ListarAtivos());
+        public ObservableCollection<IProdutosFinanceiros> ProdutosFinanceiro { get; private set; }
 
-            this.Comandos();
-        }
         public ICommand AddAcoes { get; private set; }
         public ICommand AddFundo { get; private set; }
         public ICommand Delete { get; private set; }
         public ICommand Update { get; private set; }
+       //public void notificartela()
+       // {
 
+       //   this.ProdutosFinanceiro = new List<IProdutosFinanceiros>(this.ProdutosFinanceiro);
+       //     RaisePropertyChanged("ProdutosFinanceiro");
+       // }
         public void Comandos()
         {
+
             this.AddFundo = new RelayCommand(
                (object param) =>
                {
@@ -47,12 +61,14 @@ namespace WPFMVVMCRUD.ViewModel
                    fw.ShowDialog();
                    if (fw.DialogResult.HasValue && fw.DialogResult.Value)
                    {
-                       Fundos resultado = this.bancoComando.CriarFundo(produtofinanceiro);
-                       this.ProdutosFinanceiro.Add(resultado);
+                       IProdutosFinanceiros resultado = this.bancoComando.CriarAtivo(produtofinanceiro);
+                       if (resultado != null)
+                       {
+                           this.ProdutosFinanceiro.Add(resultado);
+                          
+                       }
                    }
-               },
-                (object Param) => { return this.ProdutosFinanceiro.Count < 100; }
-
+               }
                 );
             this.AddAcoes = new RelayCommand(
                (object param) =>
@@ -64,42 +80,36 @@ namespace WPFMVVMCRUD.ViewModel
                    aw.ShowDialog();
                    if (aw.DialogResult.HasValue && aw.DialogResult.Value)
                    {
-                       Acoes resultado = this.bancoComando.CriarAcao(produtofinanceiro);
+                       IProdutosFinanceiros resultado = this.bancoComando.CriarAtivo(produtofinanceiro);
                        if (resultado != null)
                        {
                            ProdutosFinanceiro.Add(resultado);
                        }
-                       else
-                       {
-
-                       }
                    }
-               },
-                (object Param) => { return this.ProdutosFinanceiro.Count < 100; }
-
+               }
                 );
 
             this.Delete = new RelayCommand(
             (object param) =>
             {
-                bool Deletado = (this.bancoComando.Deletar(this.ProdutoSelecionado.Id, this.ProdutoSelecionado.Tipo.ToString())) ? this.ProdutosFinanceiro.Remove(this.ProdutoSelecionado) : false;
-
+                if (this.bancoComando.Deletar(this.ProdutoSelecionado.Id, this.ProdutoSelecionado.Tipo.ToString()))
+                {
+                    this.ProdutosFinanceiro.Remove(this.ProdutoSelecionado);
+                }
             },
-             (object Param) => { return this.ProdutoSelecionado != null; }
-
-             );
+             (object Param) => { return this.ProdutoSelecionado != null; });
 
             this.Update = new RelayCommand(
         (object param) =>
         {
-            var cloneProdutoFinanceiro = this.ProdutoSelecionado;
+            IProdutosFinanceiros cloneProdutoFinanceiro = this.ProdutoSelecionado;
 
             if (this.ProdutoSelecionado.Tipo == Model.Tipo.Acoes)
             {
-                AcoesWindow fw = new AcoesWindow();
-                fw.DataContext = cloneProdutoFinanceiro;
-                fw.ShowDialog();
-                if (fw.DialogResult.HasValue && fw.DialogResult.Value)
+                AcoesWindow aw = new AcoesWindow();
+                aw.DataContext = cloneProdutoFinanceiro;
+                aw.ShowDialog();
+                if (aw.DialogResult.HasValue && aw.DialogResult.Value)
                 {
                     if (this.bancoComando.Editar(cloneProdutoFinanceiro))
                     {
@@ -109,7 +119,7 @@ namespace WPFMVVMCRUD.ViewModel
             }
             else
             {
-                var fw = new FundoWindow();
+                FundoWindow fw = new FundoWindow();
                 fw.DataContext = cloneProdutoFinanceiro;
                 fw.ShowDialog();
                 if (fw.DialogResult.HasValue && fw.DialogResult.Value)

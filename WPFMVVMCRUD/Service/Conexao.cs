@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPFMVVMCRUD.Model
+namespace WPFMVVMCRUD.Service
 {
-    class Conexao
+   public class Conexao
     {
-        SqlConnection con = new SqlConnection();
-        public Conexao()
+        private IDbConnection con;
+        //public SqlConnection con;
+        public Conexao(IDbConnection con)
         {
-            con.ConnectionString = @"Data Source=DESKTOP-JOH5270\SQLEXPRESS;Initial Catalog=luztreinamento;Integrated Security=True";
+            this.con = con;
+            // this.con = new SqlConnection();
+            // con.ConnectionString = @"Data Source=DESKTOP-JOH5270\SQLEXPRESS;Initial Catalog=luztreinamento;Integrated Security=True";
         }
-        public SqlConnection conectar()
+    
+        public IDbConnection conectar()
         {
-            if (con.State == System.Data.ConnectionState.Closed)
+            if (con.State == ConnectionState.Closed )
             {
                 con.Open();
             }
@@ -24,7 +29,7 @@ namespace WPFMVVMCRUD.Model
         }
         public void desconectar()
         {
-            if (con.State == System.Data.ConnectionState.Open)
+            if (con.State == ConnectionState.Open)
             {
                 con.Close();
             }

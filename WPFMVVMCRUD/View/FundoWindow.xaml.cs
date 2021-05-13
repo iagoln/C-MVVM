@@ -10,7 +10,6 @@ namespace WPFMVVMCRUD
         public FundoWindow()
         {
             InitializeComponent();
-            //TipoComboBox.ItemsSource = Enum.GetValues(typeof(Model.Type)).Cast<Model.Type>();
            
         }
 

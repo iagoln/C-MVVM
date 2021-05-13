@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFMVVMCRUD", "WPFMVVMCRUD\WPFMVVMCRUD.csproj", "{2FD164BE-8997-4C3E-BA85-4299AD96E3D3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesteMVVM", "TesteMVVM\TesteMVVM.csproj", "{160A5290-5094-4038-9AEE-BBC3A79D8DB3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{2FD164BE-8997-4C3E-BA85-4299AD96E3D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FD164BE-8997-4C3E-BA85-4299AD96E3D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FD164BE-8997-4C3E-BA85-4299AD96E3D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{160A5290-5094-4038-9AEE-BBC3A79D8DB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{160A5290-5094-4038-9AEE-BBC3A79D8DB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{160A5290-5094-4038-9AEE-BBC3A79D8DB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{160A5290-5094-4038-9AEE-BBC3A79D8DB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

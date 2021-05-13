@@ -16,7 +16,6 @@ namespace WPFMVVMCRUD
         private void OKButton_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
-            //MessageBox.Show("teste");
         }
     }
 }

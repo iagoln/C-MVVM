@@ -7,7 +7,7 @@ using WPFMVVMCRUD.ViewModel;
 
 namespace WPFMVVMCRUD.Model
 {
-    class Fundos : BaseNotifyPropertyChanged, ICloneable, IProdutosFinanceiros
+  public  class Fundos : BaseNotifyPropertyChanged, ICloneable, IProdutosFinanceiros
     {
         private int _id;
         public int Id

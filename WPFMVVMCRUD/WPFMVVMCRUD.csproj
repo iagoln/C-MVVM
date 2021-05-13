@@ -55,19 +55,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Service\IComandoBanco.cs" />
+    <Compile Include="Service\MonkServe.cs" />
+    <Compile Include="Service\IBanco.cs" />
     <Compile Include="Service\SqlServe.cs" />
     <Compile Include="View\FundoWindow.xaml.cs">
       <DependentUpon>FundoWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BaseNotifyPropertyChanged.cs" />
+    <Compile Include="RelayCommand\BaseNotifyPropertyChanged.cs" />
     <Compile Include="View\AcoesWindow.xaml.cs">
       <DependentUpon>AcoesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Service\Conexao.cs" />
     <Compile Include="Model\Fundos.cs" />
     <Compile Include="RelayCommand\RelayCommand.cs" />
-    <Compile Include="ViewModel\IProdutosFinanceiros.cs" />
+    <Compile Include="Model\IProdutosFinanceiros.cs" />
     <Compile Include="ViewModel\ProdutosViewModel.cs" />
     <Page Include="View\FundoWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
